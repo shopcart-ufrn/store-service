@@ -1,21 +1,26 @@
 package br.edu.ufrn.store.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import br.edu.ufrn.store.dto.ProductDTO;
+import br.edu.ufrn.store.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("product")
 public class ProductController {
 
-    @GetMapping
-    public String store() {
-        return "Hello World";
+    @Autowired
+    private ProductService productService;
+
+    @GetMapping("{id}")
+    public ResponseEntity<ProductDTO> getProduct(@PathVariable Long id) {
+        ProductDTO product = productService.findById(id);
+        return ResponseEntity.ok(product);
     }
 
-    @PostMapping
-    public String post() {
-        return "Hello World";
+    @PostMapping("/sell")
+    public ResponseEntity<Long> save(@RequestBody ProductDTO product) {
+        return ResponseEntity.ok(productService.save(product));
     }
 }

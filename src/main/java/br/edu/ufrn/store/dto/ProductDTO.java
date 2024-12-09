@@ -1,19 +1,12 @@
-package br.edu.ufrn.store.model;
+package br.edu.ufrn.store.dto;
 
-import jakarta.persistence.*;
+public class ProductDTO {
 
-@Entity
-@Table(name = "product")
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
     private double value;
-
 
     public Long getId() {
         return id;
