@@ -17,8 +17,6 @@ public class ProductController {
     public ResponseEntity<ProductDTO> getProduct(@PathVariable Long id) {
         ProductDTO product = productService.findById(id);
 
-        if(product == null) return null;
-
         return ResponseEntity.ok(product);
     }
 

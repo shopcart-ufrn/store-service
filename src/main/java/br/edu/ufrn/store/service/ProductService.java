@@ -36,6 +36,7 @@ public class ProductService {
 
         if(generateRandomNumber(0.1)) {
             Thread.sleep(5000);
+            throw new RuntimeException("Error when trying to register product. Try again later");
         }
 
         var productSaved = productRepository.save(productMapper.toModel(productDTO));
