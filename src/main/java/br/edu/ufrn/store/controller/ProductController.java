@@ -16,11 +16,14 @@ public class ProductController {
     @GetMapping("{id}")
     public ResponseEntity<ProductDTO> getProduct(@PathVariable Long id) {
         ProductDTO product = productService.findById(id);
+
+        if(product == null) return null;
+
         return ResponseEntity.ok(product);
     }
 
     @PostMapping("/sell")
-    public ResponseEntity<Long> save(@RequestBody ProductDTO product) {
+    public ResponseEntity<Long> save(@RequestBody ProductDTO product) throws InterruptedException {
         return ResponseEntity.ok(productService.save(product));
     }
 }
