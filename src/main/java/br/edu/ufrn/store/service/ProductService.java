@@ -1,6 +1,7 @@
 package br.edu.ufrn.store.service;
 
 import br.edu.ufrn.store.dto.ProductDTO;
+import br.edu.ufrn.store.dto.SellRequestDTO;
 import br.edu.ufrn.store.mapper.ProductMapper;
 import br.edu.ufrn.store.model.Product;
 import br.edu.ufrn.store.repository.ProductRepository;
@@ -32,15 +33,17 @@ public class ProductService {
         return productMapper.toDTO(product);
     }
 
-    public Long save(ProductDTO productDTO) throws InterruptedException {
+    public Long sell(SellRequestDTO sellRequestDTO) throws InterruptedException {
 
         if(generateRandomNumber(0.1)) {
             Thread.sleep(5000);
             throw new RuntimeException("Error when trying to register product. Try again later");
         }
 
-        var productSaved = productRepository.save(productMapper.toModel(productDTO));
-        return productSaved.getId();
+        Product product = productRepository.findById(sellRequestDTO.getProduct())
+            .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado"));
+            
+        return product.getId();
     }
 
     public boolean generateRandomNumber(double percentage)  {

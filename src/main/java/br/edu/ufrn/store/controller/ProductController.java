@@ -1,6 +1,7 @@
 package br.edu.ufrn.store.controller;
 
 import br.edu.ufrn.store.dto.ProductDTO;
+import br.edu.ufrn.store.dto.SellRequestDTO;
 import br.edu.ufrn.store.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class ProductController {
     }
 
     @PostMapping("/sell")
-    public ResponseEntity<Long> save(@RequestBody ProductDTO product) throws InterruptedException {
-        return ResponseEntity.ok(productService.save(product));
+    public ResponseEntity<Long> save(@RequestBody SellRequestDTO sellRequestDTO) throws InterruptedException {
+        return ResponseEntity.ok(productService.sell(sellRequestDTO));
     }
 }
